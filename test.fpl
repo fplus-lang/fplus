@@ -1,1 +1,27 @@
-if true then print("foo") else print("bar") end
+if true then
+    print("foo")
+else
+    print("bar")
+end
+
+%[console.log("this will run with eval!")]% --inline javascript, included in the compiled code with eval
+
+print(%{Math.random() > 0.5}%) -- javascript embed, gets directly included in the compiled code
+
+-- comments
+--[[
+  multiline comments
+]]
+
+-- this is the compiled code
+
+--[[
+if (true) {
+console.log("foo")
+} else {
+console.log("bar")
+}
+console.log(Math.PI)
+eval("console.log(\"this will run with eval!\")")
+console.log(Math.random() > 0.5)
+]]--
