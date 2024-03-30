@@ -44,8 +44,8 @@ statement : printExpr
           | ifStatement
           | whileStatement;
 printExpr : PRINT LPAREN exprList? RPAREN;
-functionDeclaration : FUNCTION ID LPAREN params? RPAREN statement* END;
-localFunctionDeclaration : LOCAL FUNCTION ID LPAREN params? RPAREN statement* END;
+functionDeclaration : LOCAL? FUNCTION ID LPAREN params? RPAREN statement* END;
+//localFunctionDeclaration : functionDeclaration;
 params : ID (COMMA ID)*;
 objectDeclaration : LBRACE (keyValuePair (COMMA keyValuePair)*)? RBRACE;
 variableDeclaration : ID '=' expr;

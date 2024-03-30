@@ -118,6 +118,8 @@ class SimpleLangCompiler {
   }
   visitFunctionDeclaration(ctx) {
     const functionName = this.getText(ctx.ID());
+    const local = this.getText(ctx.LOCAL()) != "";
+    //console.log(this.getText(ctx.LOCAL()) === "");
     const params = ctx.params()
       ? ctx
           .params()
@@ -129,7 +131,15 @@ class SimpleLangCompiler {
       .statement()
       .map((stmt) => this.visitStatement(stmt))
       .join("\n");
-    return `function ${functionName}(${params}) {\n${statements}\n}`;
+    const exists = this.currentScope.hasOwnProperty(functionName);
+    if (!exists) {
+      this.currentScope[functionName] = true;
+    }
+    return local
+      ? `${
+          exists ? "" : "let "
+        }${functionName} = ((${params}) => {\n${statements}\n})`
+      : `function ${functionName}(${params}) {\n${statements}\n}`;
   }
   visitObjectDeclaration(ctx) {
     const keyValues = ctx
