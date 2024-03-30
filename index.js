@@ -1,7 +1,7 @@
 const args = process.argv.slice(2);
 if (args.length === 0 || args.includes("-h") || args.includes("--help")) {
   console.log(
-`
+    `
 Usage: node index.js <input_file> [options]
   
 Options:
@@ -18,7 +18,7 @@ Examples:
   node index.js test.fpl               Compiles the fplus code to JavaScript, prints it, and does nothing else
   node index.js test.fpl -d -e -m -s   Prints the parse tree, compiles it to JavaScript, evaluates it, and saves it
 `
-);
+  );
   process.exit();
 }
 const { readFileSync, writeFileSync } = require("fs");
