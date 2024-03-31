@@ -11,7 +11,7 @@ print(%{Math.random() > 0.5}%) -- javascript embed, gets directly included in th
 -- comments
 --[[
   multiline comments
-]]
+]]--
 
 -- this is the compiled code
 

@@ -2,7 +2,7 @@ const args = process.argv.slice(2);
 if (args.length === 0 || args.includes("-h") || args.includes("--help")) {
   console.log(
     `
-Usage: node index.js <input_file> [options]
+Usage: (node index.js | other run command) <input_file> [options]
   
 Options:
   -h, --help      Print this help message
