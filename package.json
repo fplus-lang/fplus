@@ -6,7 +6,7 @@
   },
   "scripts": {
     "build": "npm i -g bun && bun i && antlr4ng -o ./lib -Dlanguage=JavaScript -visitor -listener *.g4 && babel ./lib --out-dir ./lib --plugins=@babel/plugin-transform-modules-commonjs",
-    "pkg": "npm run build && pkg --targets node18-linux-x64,node18-win-x64,node18-macos-x64,node18-linux-arm64,node18-win-arm64,node18-macos-arm64 --out-path ./dist index.js",
+    "pkg": "npm run build && pkg --targets node18-linux-x64,node18-win-x64,node18-macos-x64,node18-linux-arm64,node18-win-arm64,node18-macos-arm64 --compress GZip --out-path ./dist index.js",
     "publish": "git tag -a \"$TAG\" -m \"Release $TAG\" && zip -r \"fplus-$TAG.zip\" ./dist/* && gh release create \"$TAG\" --title \"Release $TAG\" --notes \"\" -R https://github.com/FreshPenguin112/fplus fplus-\"$TAG\".zip && rm fplus-\"$TAG\".zip"
   },
   "dependencies": {
