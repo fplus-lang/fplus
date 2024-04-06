@@ -56,6 +56,7 @@ expr : STRING
      | INTEGER
      | FLOAT 
      | BOOLEAN
+     | expr ('*' | '/' | '+' | '-' | '^') expr
      | arrayExpr
      | objectExpr
      | functionCall

@@ -40,11 +40,34 @@ class SimpleLangCompiler {
 
   visitExprList(ctx) {
     let output = "";
+    var e = false;
+    for (let i of ctx.expr(0).children) {
+      //console.log(i.getText())
+      if (["^", "*", "/", "+", "-"].includes(i.getText())) {
+        for (let x of i.parentCtx.children) {
+          if (typeof x.expr === "function") {
+            //console.log("expr")
+            if (typeof (x.expr() === "array")) {
+              if (e === false) {
+                e = "";
+              }
+            }
+          }
+          if (!(e === false)) {
+            e += (x.getText() === "^" ? "**" : x.getText());
+          }
+        }
+        //console.log(i.parentCtx.children[0].expr());
+      }
+    }
+    //console.log(e);
+    //console.log(ctx.expr()[0].children[1].getText())
     for (let i = 0; i < ctx.expr().length; i++) {
       output += `${this.visitExpr(ctx.expr(i))}${
         i !== ctx.expr().length - 1 ? ", " : ""
       }`;
     }
+    if (e) output = e
     return output;
   }
   visitExpr(ctx) {

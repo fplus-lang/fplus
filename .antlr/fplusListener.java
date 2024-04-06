@@ -1,4 +1,4 @@
-// Generated from /home/freshpenguin112/Desktop/projects/testlang/fplus.g4 by ANTLR 4.13.1
+// Generated from /home/freshpenguin112/Desktop/projects/fplus/fplus.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -46,16 +46,6 @@ public interface fplusListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunctionDeclaration(fplusParser.FunctionDeclarationContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link fplusParser#localFunctionDeclaration}.
-	 * @param ctx the parse tree
-	 */
-	void enterLocalFunctionDeclaration(fplusParser.LocalFunctionDeclarationContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link fplusParser#localFunctionDeclaration}.
-	 * @param ctx the parse tree
-	 */
-	void exitLocalFunctionDeclaration(fplusParser.LocalFunctionDeclarationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link fplusParser#params}.
 	 * @param ctx the parse tree
@@ -217,13 +207,43 @@ public interface fplusListener extends ParseTreeListener {
 	 */
 	void exitJavaScriptEmbed(fplusParser.JavaScriptEmbedContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link fplusParser#arithmeticExpr}.
+	 * Enter a parse tree produced by {@link fplusParser#ifStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterArithmeticExpr(fplusParser.ArithmeticExprContext ctx);
+	void enterIfStatement(fplusParser.IfStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link fplusParser#arithmeticExpr}.
+	 * Exit a parse tree produced by {@link fplusParser#ifStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitArithmeticExpr(fplusParser.ArithmeticExprContext ctx);
+	void exitIfStatement(fplusParser.IfStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link fplusParser#whileStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhileStatement(fplusParser.WhileStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link fplusParser#whileStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhileStatement(fplusParser.WhileStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link fplusParser#elseIfStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterElseIfStatement(fplusParser.ElseIfStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link fplusParser#elseIfStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitElseIfStatement(fplusParser.ElseIfStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link fplusParser#elseStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterElseStatement(fplusParser.ElseStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link fplusParser#elseStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitElseStatement(fplusParser.ElseStatementContext ctx);
 }
