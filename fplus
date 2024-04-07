@@ -60783,7 +60783,7 @@ var require_compiler = __commonJS({
         let output = "";
         var e2 = false;
         for (let i of ctx.expr(0).children) {
-          if (["*", "/", "+", "-"].includes(i.getText())) {
+          if (["^", "*", "/", "+", "-"].includes(i.getText())) {
             for (let x of i.parentCtx.children) {
               if (typeof x.expr === "function") {
                 if (typeof (x.expr() === "array")) {
