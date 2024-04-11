@@ -21,7 +21,6 @@ console.log("foo")
 } else {
 console.log("bar")
 }
-console.log(Math.PI)
 eval("console.log(\"this will run with eval!\")")
 console.log(Math.random() > 0.5)
 ]]--
