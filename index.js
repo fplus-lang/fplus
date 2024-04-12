@@ -49,11 +49,11 @@ read((code) => {
   }
   //console.log(code.toString())
 
-  const { InputStream, CommonTokenStream } = require("antlr4");
+  const { InputStream, CommonTokenStream } = require("./antlr4");
   const { highlight } = require("cli-highlight");
   const { runInThisContext } = require("vm");
   const { format } = require("util");
-  const { minify } = require("uglify-js");
+  const { minify } = require("babel-minify");
   const chalk = require("chalk");
   const SimpleLangLexer = require("./lib/fplusLexer").default;
   const SimpleLangParser = require("./lib/fplusParser").default;
@@ -76,17 +76,7 @@ read((code) => {
   const compiler = new SimpleLangCompiler(parser);
   var compiledCode = compiler.compile(tree);
   if (args.includes("-m") || args.includes("--minify")) {
-    compiledCode = minify(compiledCode, {
-      toplevel: true,
-      compress: {
-        passes: 3,
-        evaluate: true,
-      },
-      mangle: {
-        toplevel: true,
-        eval: true,
-      },
-    }).code;
+    compiledCode = minify(compiledCode).code;
   }
   // Evaluate compiled code
   console.log(chalk.blue.bold("Compiled Code:\n"));

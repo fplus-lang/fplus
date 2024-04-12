@@ -1,0 +1,11 @@
+print("hello world")
+local pot = 1
+local pan = 5
+
+if %{pan == 5}% then
+    pan = %{pan - 5}%
+    print(false)
+else
+    pan = %{pan + 5}%
+    print(true)
+end

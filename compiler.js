@@ -19,7 +19,7 @@ class SimpleLangCompiler {
         ctx.printExpr().exprList()
           ? this.visitExprList(ctx.printExpr().exprList())
           : ""
-      })`;
+      });`;
     } else if (this.isType(ctx, "functionDeclaration")) {
       return this.visitFunctionDeclaration(ctx.functionDeclaration());
     } else if (this.isType(ctx, "objectDeclaration")) {
@@ -54,7 +54,7 @@ class SimpleLangCompiler {
             }
           }
           if (!(e === false)) {
-            e += (x.getText() === "^" ? "**" : x.getText());
+            e += x.getText() === "^" ? "**" : x.getText();
           }
         }
         //console.log(i.parentCtx.children[0].expr());
@@ -67,7 +67,7 @@ class SimpleLangCompiler {
         i !== ctx.expr().length - 1 ? ", " : ""
       }`;
     }
-    if (e) output = e
+    if (e) output = e;
     return output;
   }
   visitExpr(ctx) {
@@ -221,21 +221,29 @@ class SimpleLangCompiler {
   }
   visitIfStatement(ctx) {
     const condition = this.visitExpr(ctx.expr(0));
-    const thenStatements = this.visitStatement(ctx.statement(0));
+    //const thenStatements = this.visitStatement(ctx.statement(0));
     let output = `if (${condition}) {\n${thenStatements}\n}`;
-
+    if (ctx.statement()) {
+      var thenStatements = "";
+      for (let i of ctx.statement()) {
+        thenStatements += this.visitStatement(i) + "\n"
+      }
+      //output += ` else {\n${elseStatements}\n}`;
+    }
+    output = `if (${condition}) {\n${thenStatements}\n}`;
     for (let i = 0; i < ctx.elseIfStatement().length; i++) {
       const elseIfCondition = this.visitExpr(ctx.elseIfStatement(i).expr());
-      const elseIfThenStatements = this.visitStatement(
+      const elseIfThenStatements = "\n" + this.visitStatement(
         ctx.elseIfStatement(i).statement(0)
-      );
+      ) + "\n";
       output += ` else if (${elseIfCondition}) {\n${elseIfThenStatements}\n}`;
     }
-
+    //console.log(ctx.elseStatement().statement().length);
     if (ctx.elseStatement()) {
-      const elseStatements = this.visitStatement(
-        ctx.elseStatement().statement(0)
-      );
+      var elseStatements = "";
+      for (let i of ctx.elseStatement().statement()) {
+        elseStatements += "\n" + this.visitStatement(i) + "\n";
+      }
       output += ` else {\n${elseStatements}\n}`;
     }
 
