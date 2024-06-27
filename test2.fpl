@@ -1,4 +1,0 @@
---[[print({x = "test"}.x)
-print({"hello", "there"}[1])
-function() print("the j") end ()]]--
-loadstring("print('test')")()
