@@ -1,4 +1,4 @@
-// Generated from /home/freshpenguin112/Desktop/projects/fplus/fplus.g4 by ANTLR 4.13.1
+// Generated from /home/freshpenguin112/Desktop/projects/fplus3/fplus.g4 by ANTLR 4.13.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -59,6 +59,18 @@ public class fplusBaseListener implements fplusListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFunctionDeclaration(fplusParser.FunctionDeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAnonymousFunctionDeclaration(fplusParser.AnonymousFunctionDeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAnonymousFunctionDeclaration(fplusParser.AnonymousFunctionDeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -53,7 +53,7 @@ read((code) => {
   const { highlight } = require("cli-highlight");
   const { runInThisContext } = require("vm");
   const { format } = require("util");
-  const { minify } = require("babel-minify");
+  const minify = require("babel-minify");
   const chalk = require("chalk");
   const SimpleLangLexer = require("./lib/fplusLexer").default;
   const SimpleLangParser = require("./lib/fplusParser").default;
@@ -67,7 +67,7 @@ read((code) => {
   const lexer = new SimpleLangLexer(input);
   const tokens = new CommonTokenStream(lexer);
   const parser = new SimpleLangParser(tokens);
-  parser.buildParseTrees = true;
+  //parser.buildParseTrees = true;
   const tree = parser.program();
   //console.log(args)
   if (args.includes("-d") || args.includes("--debug"))

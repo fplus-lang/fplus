@@ -1,3 +1,7 @@
+const { InputStream, CommonTokenStream } = require("./antlr4");
+const SimpleLangLexer = require("./lib/fplusLexer").default;
+const SimpleLangParser = require("./lib/fplusParser").default;
+
 class SimpleLangCompiler {
   constructor(parser) {
     this.parser = parser;
@@ -22,6 +26,10 @@ class SimpleLangCompiler {
       });`;
     } else if (this.isType(ctx, "functionDeclaration")) {
       return this.visitFunctionDeclaration(ctx.functionDeclaration());
+    } else if (this.isType(ctx, "anonymousFunctionDeclaration")) {
+      return this.visitAnonymousFunctionDeclaration(
+        ctx.anonymousFunctionDeclaration()
+      );
     } else if (this.isType(ctx, "objectDeclaration")) {
       return this.visitObjectDeclaration(ctx.objectDeclaration());
     } else if (this.isType(ctx, "variableDeclaration")) {
@@ -83,6 +91,8 @@ class SimpleLangCompiler {
       return ctx.ID().getText();
     } else if (this.isType(ctx, "arithmeticExpr")) {
       return this.visitArithmeticExpr(ctx.arithmeticExpr());
+    } else if (this.isType(ctx, "loadstring")) {
+      return this.visitLoadstring(ctx.loadstring());
     } else if (this.isType(ctx, "arrayExpr")) {
       return this.visitArrayExpr(ctx.arrayExpr());
     } else if (this.isType(ctx, "objectExpr")) {
@@ -124,20 +134,41 @@ class SimpleLangCompiler {
       }
     })();
   }
+  visitLoadstring(ctx) {
+    const input = new InputStream(JSON.parse(this.visitExpr(ctx.expr())));
+    const lexer = new SimpleLangLexer(input);
+    const tokens = new CommonTokenStream(lexer);
+    const parser = new SimpleLangParser(tokens);
+    parser.buildParseTrees = true;
+    const tree = parser.program();
+    return `new Function(\`${this.visitProgram(tree)}\`)`
+  }
   visitFunctionCall(ctx) {
-    const functionName = this.getText(ctx.ID());
+    const functionName = !ctx.loadstring ? (!ctx.anonymousFunctionDeclaration
+      ? this.getText(ctx.ID())
+      : this.visitAnonymousFunctionDeclaration(
+          ctx.anonymousFunctionDeclaration()
+        )) : this.visitLoadstring(ctx.loadstring());
+    //console.log(function)
     const args = ctx.exprList() ? this.visitExprList(ctx.exprList()) : "";
     return `${functionName}(${args})`;
   }
   visitObjectAccess(ctx) {
-    const objectName = this.getText(ctx.ID(0));
+    let objectName;
+    if (!ctx.objectDeclaration) {
+      objectName = this.getText(ctx.ID(0));
+    } else objectName = this.visitObjectDeclaration(ctx.objectDeclaration());
     const propertyName = this.getText(ctx.ID(1));
+
     return `${objectName}.${propertyName}`;
   }
   visitArrayAccess(ctx) {
-    const arrayName = this.getText(ctx.ID());
-    const index = this.getText(ctx.INTEGER());
-    return `${arrayName}[${index}]`;
+    let arrayName;
+    if (!ctx.arrayExpr) {
+      arrayName = this.getText(ctx.ID());
+    } else arrayName = this.visitArrayExpr(ctx.arrayExpr());
+    const index = Number(this.getText(ctx.INTEGER()));
+    return `${arrayName}[${index - 1}]`;
   }
   visitFunctionDeclaration(ctx) {
     const functionName = this.getText(ctx.ID());
@@ -163,6 +194,23 @@ class SimpleLangCompiler {
           exists ? "" : "let "
         }${functionName} = ((${params}) => {\n${statements}\n})`
       : `function ${functionName}(${params}) {\n${statements}\n}`;
+  }
+  visitAnonymousFunctionDeclaration(ctx) {
+    //const functionName = this.getText(ctx.ID());
+    //const local = this.getText(ctx.LOCAL()) != "";
+    //console.log(this.getText(ctx.LOCAL()) === "");
+    const params = ctx.params()
+      ? ctx
+          .params()
+          .ID()
+          .map((id) => this.getText(id))
+          .join(", ")
+      : "";
+    const statements = ctx
+      .statement()
+      .map((stmt) => this.visitStatement(stmt))
+      .join("\n");
+    return `((${params}) => {\n${statements}\n})`;
   }
   visitObjectDeclaration(ctx) {
     const keyValues = ctx
@@ -226,16 +274,15 @@ class SimpleLangCompiler {
     if (ctx.statement()) {
       var thenStatements = "";
       for (let i of ctx.statement()) {
-        thenStatements += this.visitStatement(i) + "\n"
+        thenStatements += this.visitStatement(i) + "\n";
       }
       //output += ` else {\n${elseStatements}\n}`;
     }
     output = `if (${condition}) {\n${thenStatements}\n}`;
     for (let i = 0; i < ctx.elseIfStatement().length; i++) {
       const elseIfCondition = this.visitExpr(ctx.elseIfStatement(i).expr());
-      const elseIfThenStatements = "\n" + this.visitStatement(
-        ctx.elseIfStatement(i).statement(0)
-      ) + "\n";
+      const elseIfThenStatements =
+        "\n" + this.visitStatement(ctx.elseIfStatement(i).statement(0)) + "\n";
       output += ` else if (${elseIfCondition}) {\n${elseIfThenStatements}\n}`;
     }
     //console.log(ctx.elseStatement().statement().length);

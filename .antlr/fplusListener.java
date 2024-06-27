@@ -1,4 +1,4 @@
-// Generated from /home/freshpenguin112/Desktop/projects/fplus/fplus.g4 by ANTLR 4.13.1
+// Generated from /home/freshpenguin112/Desktop/projects/fplus3/fplus.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -46,6 +46,16 @@ public interface fplusListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunctionDeclaration(fplusParser.FunctionDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link fplusParser#anonymousFunctionDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterAnonymousFunctionDeclaration(fplusParser.AnonymousFunctionDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link fplusParser#anonymousFunctionDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitAnonymousFunctionDeclaration(fplusParser.AnonymousFunctionDeclarationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link fplusParser#params}.
 	 * @param ctx the parse tree

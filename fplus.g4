@@ -9,6 +9,7 @@ FLOAT : '-'? [0-9]* '.' [0-9]+;
 BOOLEAN : 'true' | 'false';
 PRINT : 'print';
 FUNCTION : 'function';
+LOADSTRING : 'loadstring';
 END : 'end';
 IF : 'if';
 THEN : 'then';
@@ -37,6 +38,7 @@ WS : [ \t\r\n]+ -> skip;
 program : statement* EOF;
 statement : printExpr
           | functionDeclaration
+          | anonymousFunctionDeclaration
           | objectDeclaration
           | variableDeclaration
           | localVariableDeclaration
@@ -46,6 +48,7 @@ statement : printExpr
 printExpr : PRINT LPAREN exprList? RPAREN;
 functionDeclaration : LOCAL? FUNCTION ID LPAREN params? RPAREN statement* END;
 //localFunctionDeclaration : functionDeclaration;
+anonymousFunctionDeclaration : FUNCTION LPAREN params? RPAREN statement* END;
 params : ID (COMMA ID)*;
 objectDeclaration : LBRACE (keyValuePair (COMMA keyValuePair)*)? RBRACE;
 variableDeclaration : ID '=' expr;
@@ -57,6 +60,7 @@ expr : STRING
      | FLOAT 
      | BOOLEAN
      | expr ('*' | '/' | '+' | '-' | '^') expr
+     | loadstring
      | arrayExpr
      | objectExpr
      | functionCall
@@ -66,11 +70,12 @@ expr : STRING
      | parens
      | inlineJsExpr
      | javaScriptEmbed;
-functionCall : ID LPAREN exprList? RPAREN;
-objectAccess : ID (DOT ID | LSQUARE expr RSQUARE);
-arrayAccess : ID LSQUARE INTEGER RSQUARE;
+functionCall : ID | anonymousFunctionDeclaration | loadstring LPAREN exprList? RPAREN;
+objectAccess : ID | objectDeclaration (DOT ID | LSQUARE expr RSQUARE);
+arrayAccess : ID | arrayExpr LSQUARE INTEGER RSQUARE;
 variableAccess : ID;
 parens : LPAREN expr RPAREN;
+loadstring : LOADSTRING LPAREN expr RPAREN;
 arrayExpr : LBRACE exprList? RBRACE;
 objectExpr : LBRACE (keyValuePair (COMMA keyValuePair)*)? RBRACE;
 inlineJsExpr : INLINE_JS_EXPR;
