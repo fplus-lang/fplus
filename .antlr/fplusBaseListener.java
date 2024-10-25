@@ -1,4 +1,4 @@
-// Generated from /home/freshpenguin112/Desktop/projects/fplus3/fplus.g4 by ANTLR 4.13.1
+// Generated from /home/freshpenguin112/Desktop/projects/fplus/fplus.g4 by ANTLR 4.13.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -215,6 +215,18 @@ public class fplusBaseListener implements fplusListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitParens(fplusParser.ParensContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLoadstring(fplusParser.LoadstringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLoadstring(fplusParser.LoadstringContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

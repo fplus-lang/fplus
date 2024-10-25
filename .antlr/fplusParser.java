@@ -1,4 +1,4 @@
-// Generated from /home/freshpenguin112/Desktop/projects/fplus3/fplus.g4 by ANTLR 4.13.1
+// Generated from /home/freshpenguin112/Desktop/projects/fplus/fplus.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -125,6 +125,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_program; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterProgram(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitProgram(this);
+		}
 	}
 
 	public final ProgramContext program() throws RecognitionException {
@@ -196,6 +204,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_statement; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitStatement(this);
+		}
 	}
 
 	public final StatementContext statement() throws RecognitionException {
@@ -293,6 +309,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_printExpr; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterPrintExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitPrintExpr(this);
+		}
 	}
 
 	public final PrintExprContext printExpr() throws RecognitionException {
@@ -352,6 +376,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_functionDeclaration; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterFunctionDeclaration(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitFunctionDeclaration(this);
+		}
 	}
 
 	public final FunctionDeclarationContext functionDeclaration() throws RecognitionException {
@@ -437,6 +469,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_anonymousFunctionDeclaration; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterAnonymousFunctionDeclaration(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitAnonymousFunctionDeclaration(this);
+		}
 	}
 
 	public final AnonymousFunctionDeclarationContext anonymousFunctionDeclaration() throws RecognitionException {
@@ -505,6 +545,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_params; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterParams(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitParams(this);
+		}
 	}
 
 	public final ParamsContext params() throws RecognitionException {
@@ -563,6 +611,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_objectDeclaration; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterObjectDeclaration(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitObjectDeclaration(this);
+		}
 	}
 
 	public final ObjectDeclarationContext objectDeclaration() throws RecognitionException {
@@ -625,6 +681,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_variableDeclaration; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterVariableDeclaration(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitVariableDeclaration(this);
+		}
 	}
 
 	public final VariableDeclarationContext variableDeclaration() throws RecognitionException {
@@ -663,6 +727,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_localVariableDeclaration; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterLocalVariableDeclaration(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitLocalVariableDeclaration(this);
+		}
 	}
 
 	public final LocalVariableDeclarationContext localVariableDeclaration() throws RecognitionException {
@@ -702,6 +774,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_keyValuePair; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterKeyValuePair(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitKeyValuePair(this);
+		}
 	}
 
 	public final KeyValuePairContext keyValuePair() throws RecognitionException {
@@ -747,6 +827,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_exprList; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterExprList(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitExprList(this);
+		}
 	}
 
 	public final ExprListContext exprList() throws RecognitionException {
@@ -833,6 +921,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expr; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitExpr(this);
+		}
 	}
 
 	public final ExprContext expr() throws RecognitionException {
@@ -1003,6 +1099,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_functionCall; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterFunctionCall(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitFunctionCall(this);
+		}
 	}
 
 	public final FunctionCallContext functionCall() throws RecognitionException {
@@ -1079,6 +1183,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_objectAccess; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterObjectAccess(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitObjectAccess(this);
+		}
 	}
 
 	public final ObjectAccessContext objectAccess() throws RecognitionException {
@@ -1154,6 +1266,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_arrayAccess; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterArrayAccess(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitArrayAccess(this);
+		}
 	}
 
 	public final ArrayAccessContext arrayAccess() throws RecognitionException {
@@ -1205,6 +1325,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_variableAccess; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterVariableAccess(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitVariableAccess(this);
+		}
 	}
 
 	public final VariableAccessContext variableAccess() throws RecognitionException {
@@ -1239,6 +1367,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_parens; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterParens(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitParens(this);
+		}
 	}
 
 	public final ParensContext parens() throws RecognitionException {
@@ -1278,6 +1414,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_loadstring; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterLoadstring(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitLoadstring(this);
+		}
 	}
 
 	public final LoadstringContext loadstring() throws RecognitionException {
@@ -1318,6 +1462,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_arrayExpr; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterArrayExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitArrayExpr(this);
+		}
 	}
 
 	public final ArrayExprContext arrayExpr() throws RecognitionException {
@@ -1372,6 +1524,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_objectExpr; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterObjectExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitObjectExpr(this);
+		}
 	}
 
 	public final ObjectExprContext objectExpr() throws RecognitionException {
@@ -1431,6 +1591,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_inlineJsExpr; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterInlineJsExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitInlineJsExpr(this);
+		}
 	}
 
 	public final InlineJsExprContext inlineJsExpr() throws RecognitionException {
@@ -1461,6 +1629,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_javaScriptEmbed; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterJavaScriptEmbed(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitJavaScriptEmbed(this);
+		}
 	}
 
 	public final JavaScriptEmbedContext javaScriptEmbed() throws RecognitionException {
@@ -1514,6 +1690,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_ifStatement; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterIfStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitIfStatement(this);
+		}
 	}
 
 	public final IfStatementContext ifStatement() throws RecognitionException {
@@ -1630,6 +1814,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_whileStatement; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterWhileStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitWhileStatement(this);
+		}
 	}
 
 	public final WhileStatementContext whileStatement() throws RecognitionException {
@@ -1691,6 +1883,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_elseIfStatement; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterElseIfStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitElseIfStatement(this);
+		}
 	}
 
 	public final ElseIfStatementContext elseIfStatement() throws RecognitionException {
@@ -1746,6 +1946,14 @@ public class fplusParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_elseStatement; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterElseStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitElseStatement(this);
+		}
 	}
 
 	public final ElseStatementContext elseStatement() throws RecognitionException {

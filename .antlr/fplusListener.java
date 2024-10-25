@@ -1,4 +1,4 @@
-// Generated from /home/freshpenguin112/Desktop/projects/fplus3/fplus.g4 by ANTLR 4.13.1
+// Generated from /home/freshpenguin112/Desktop/projects/fplus/fplus.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -176,6 +176,16 @@ public interface fplusListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitParens(fplusParser.ParensContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link fplusParser#loadstring}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoadstring(fplusParser.LoadstringContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link fplusParser#loadstring}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoadstring(fplusParser.LoadstringContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link fplusParser#arrayExpr}.
 	 * @param ctx the parse tree
