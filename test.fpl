@@ -8,6 +8,15 @@ end
 
 print(%{Math.random() > 0.5}%) -- javascript embed, gets directly included in the compiled code
 
+local function func1() -- simple function declarations
+    print("im a function!")
+end
+func1()
+
+local func2 = loadstring("print('hi')") -- loadstring, converts a string that has fplus code into a function
+func2()
+
+
 -- comments
 --[[
   multiline comments
@@ -17,10 +26,20 @@ print(%{Math.random() > 0.5}%) -- javascript embed, gets directly included in th
 
 --[[
 if (true) {
-console.log("foo")
+console.log("foo");
+
 } else {
-console.log("bar")
+
+console.log("bar");
+
 }
 eval("console.log(\"this will run with eval!\")")
-console.log(Math.random() > 0.5)
+console.log(Math.random() > 0.5);
+let func1 = (() => {
+console.log("im a function!");
+})
+func1()
+let func2 = new Function(`console.log('hi');
+`);
+func2()
 ]]--

@@ -70,7 +70,7 @@ expr : STRING
      | parens
      | inlineJsExpr
      | javaScriptEmbed;
-functionCall : ID | anonymousFunctionDeclaration | loadstring LPAREN exprList? RPAREN;
+functionCall : (ID | anonymousFunctionDeclaration | loadstring) LPAREN exprList? RPAREN;
 objectAccess : ID | objectDeclaration (DOT ID | LSQUARE expr RSQUARE);
 arrayAccess : ID | arrayExpr LSQUARE INTEGER RSQUARE;
 variableAccess : ID;

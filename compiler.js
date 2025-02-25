@@ -148,7 +148,7 @@ class SimpleLangCompiler {
       ? this.getText(ctx.ID())
       : this.visitAnonymousFunctionDeclaration(
           ctx.anonymousFunctionDeclaration()
-        )) : this.visitLoadstring(ctx.loadstring());
+        )) : (this.getText(ctx.ID()) ? this.getText(ctx.ID()) : this.visitLoadstring(ctx.loadstring()));
     //console.log(function)
     const args = ctx.exprList() ? this.visitExprList(ctx.exprList()) : "";
     return `${functionName}(${args})`;
