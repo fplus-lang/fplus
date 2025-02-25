@@ -7,18 +7,23 @@ STRING : ( '\'' ( ~'\'' | '\\' . )* '\'' | '"' ( ~'"' | '\\' . )* '"' );
 INTEGER : '-'? [0-9]+;
 FLOAT : '-'? [0-9]* '.' [0-9]+;
 BOOLEAN : 'true' | 'false';
+NIL : 'nil';
 PRINT : 'print';
 FUNCTION : 'function';
 LOADSTRING : 'loadstring';
 END : 'end';
+NOT : 'not';
 IF : 'if';
 THEN : 'then';
 ELSE : 'else';
 ELSEIF : 'elseif';
 WHILE : 'while';
 DO : 'do';
+FOR : 'for';
+IN : 'in';
 LOCAL : 'local';
 LET : 'let';
+BREAK : 'break';
 LPAREN : '(';
 RPAREN : ')';
 LBRACE : '{';
@@ -39,48 +44,58 @@ program : statement* EOF;
 statement : printExpr
           | functionDeclaration
           | anonymousFunctionDeclaration
-          | objectDeclaration
+          | tableDeclaration
           | variableDeclaration
           | localVariableDeclaration
           | expr
           | ifStatement
-          | whileStatement;
+          | whileStatement
+          | forStatement
+          | breakStatement;
 printExpr : PRINT LPAREN exprList? RPAREN;
 functionDeclaration : LOCAL? FUNCTION ID LPAREN params? RPAREN statement* END;
-//localFunctionDeclaration : functionDeclaration;
 anonymousFunctionDeclaration : FUNCTION LPAREN params? RPAREN statement* END;
 params : ID (COMMA ID)*;
-objectDeclaration : LBRACE (keyValuePair (COMMA keyValuePair)*)? RBRACE;
+tableDeclaration : LBRACE ((exprList | keyValuePair) (COMMA (exprList | keyValuePair))*)? RBRACE;
 variableDeclaration : ID '=' expr;
 localVariableDeclaration : LOCAL ID '=' expr;
-keyValuePair : (ID) '=' expr;
+keyValuePair : (ID | STRING) '=' expr;
 exprList : expr (COMMA expr)*;
 expr : STRING 
      | INTEGER
      | FLOAT 
      | BOOLEAN
-     | expr ('*' | '/' | '+' | '-' | '^') expr
+     | NIL
+     | ID
+     | expr ('*' | '/' | '+' | '-' | '^' | '%' | '<<' | '>>' | '&' | '|' | '~') expr
+     | expr ('==' | '!=' | '<' | '<=' | '>' | '>=' ) expr
+     | expr ('and' | 'or') expr
+     | NOT expr
      | loadstring
-     | arrayExpr
-     | objectExpr
+     //| arrayExpr
+     //| objectExpr
      | functionCall
-     | objectAccess
-     | arrayAccess
+     | tableAccess
+     //| arrayAccess
      | variableAccess
+     | tableDeclaration
+     //| arrayDeclaration
      | parens
      | inlineJsExpr
      | javaScriptEmbed;
 functionCall : (ID | anonymousFunctionDeclaration | loadstring) LPAREN exprList? RPAREN;
-objectAccess : ID | objectDeclaration (DOT ID | LSQUARE expr RSQUARE);
-arrayAccess : ID | arrayExpr LSQUARE INTEGER RSQUARE;
+tableAccess : (ID | tableDeclaration) (DOT ID | LSQUARE expr RSQUARE);
+//arrayAccess : (ID | arrayDeclaration) LSQUARE INTEGER RSQUARE;
 variableAccess : ID;
 parens : LPAREN expr RPAREN;
 loadstring : LOADSTRING LPAREN expr RPAREN;
-arrayExpr : LBRACE exprList? RBRACE;
-objectExpr : LBRACE (keyValuePair (COMMA keyValuePair)*)? RBRACE;
+//arrayDeclaration : LBRACE exprList? RBRACE;
+//objectExpr : LBRACE (keyValuePair (COMMA keyValuePair)*)? RBRACE;
 inlineJsExpr : INLINE_JS_EXPR;
 javaScriptEmbed : JAVASCRIPT_EMBED;
 ifStatement : IF expr THEN statement* END? (elseIfStatement END?)* (elseStatement END?)? END;
 whileStatement : WHILE expr DO statement* END;
+forStatement : FOR ID IN expr DO statement* END;
+breakStatement : BREAK;
 elseIfStatement : ELSEIF expr THEN statement*;
 elseStatement : ELSE statement*;

@@ -24,9 +24,9 @@ public class fplusParser extends Parser {
 		WS=38;
 	public static final int
 		RULE_program = 0, RULE_statement = 1, RULE_printExpr = 2, RULE_functionDeclaration = 3, 
-		RULE_anonymousFunctionDeclaration = 4, RULE_params = 5, RULE_objectDeclaration = 6, 
+		RULE_anonymousFunctionDeclaration = 4, RULE_params = 5, RULE_tableDeclaration = 6, 
 		RULE_variableDeclaration = 7, RULE_localVariableDeclaration = 8, RULE_keyValuePair = 9, 
-		RULE_exprList = 10, RULE_expr = 11, RULE_functionCall = 12, RULE_objectAccess = 13, 
+		RULE_exprList = 10, RULE_expr = 11, RULE_functionCall = 12, RULE_tableAccess = 13, 
 		RULE_arrayAccess = 14, RULE_variableAccess = 15, RULE_parens = 16, RULE_loadstring = 17, 
 		RULE_arrayExpr = 18, RULE_objectExpr = 19, RULE_inlineJsExpr = 20, RULE_javaScriptEmbed = 21, 
 		RULE_ifStatement = 22, RULE_whileStatement = 23, RULE_elseIfStatement = 24, 
@@ -34,8 +34,8 @@ public class fplusParser extends Parser {
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"program", "statement", "printExpr", "functionDeclaration", "anonymousFunctionDeclaration", 
-			"params", "objectDeclaration", "variableDeclaration", "localVariableDeclaration", 
-			"keyValuePair", "exprList", "expr", "functionCall", "objectAccess", "arrayAccess", 
+			"params", "tableDeclaration", "variableDeclaration", "localVariableDeclaration", 
+			"keyValuePair", "exprList", "expr", "functionCall", "tableAccess", "arrayAccess", 
 			"variableAccess", "parens", "loadstring", "arrayExpr", "objectExpr", 
 			"inlineJsExpr", "javaScriptEmbed", "ifStatement", "whileStatement", "elseIfStatement", 
 			"elseStatement"
@@ -182,8 +182,8 @@ public class fplusParser extends Parser {
 		public AnonymousFunctionDeclarationContext anonymousFunctionDeclaration() {
 			return getRuleContext(AnonymousFunctionDeclarationContext.class,0);
 		}
-		public ObjectDeclarationContext objectDeclaration() {
-			return getRuleContext(ObjectDeclarationContext.class,0);
+		public tableDeclarationContext tableDeclaration() {
+			return getRuleContext(tableDeclarationContext.class,0);
 		}
 		public VariableDeclarationContext variableDeclaration() {
 			return getRuleContext(VariableDeclarationContext.class,0);
@@ -246,7 +246,7 @@ public class fplusParser extends Parser {
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(63);
-				objectDeclaration();
+				tableDeclaration();
 				}
 				break;
 			case 5:
@@ -594,7 +594,7 @@ public class fplusParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class ObjectDeclarationContext extends ParserRuleContext {
+	public static class tableDeclarationContext extends ParserRuleContext {
 		public TerminalNode LBRACE() { return getToken(fplusParser.LBRACE, 0); }
 		public TerminalNode RBRACE() { return getToken(fplusParser.RBRACE, 0); }
 		public List<KeyValuePairContext> keyValuePair() {
@@ -607,23 +607,23 @@ public class fplusParser extends Parser {
 		public TerminalNode COMMA(int i) {
 			return getToken(fplusParser.COMMA, i);
 		}
-		public ObjectDeclarationContext(ParserRuleContext parent, int invokingState) {
+		public tableDeclarationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_objectDeclaration; }
+		@Override public int getRuleIndex() { return RULE_tableDeclaration; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterObjectDeclaration(this);
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).entertableDeclaration(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitObjectDeclaration(this);
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exittableDeclaration(this);
 		}
 	}
 
-	public final ObjectDeclarationContext objectDeclaration() throws RecognitionException {
-		ObjectDeclarationContext _localctx = new ObjectDeclarationContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_objectDeclaration);
+	public final tableDeclarationContext tableDeclaration() throws RecognitionException {
+		tableDeclarationContext _localctx = new tableDeclarationContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_tableDeclaration);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -893,8 +893,8 @@ public class fplusParser extends Parser {
 		public FunctionCallContext functionCall() {
 			return getRuleContext(FunctionCallContext.class,0);
 		}
-		public ObjectAccessContext objectAccess() {
-			return getRuleContext(ObjectAccessContext.class,0);
+		public tableAccessContext tableAccess() {
+			return getRuleContext(tableAccessContext.class,0);
 		}
 		public ArrayAccessContext arrayAccess() {
 			return getRuleContext(ArrayAccessContext.class,0);
@@ -1001,7 +1001,7 @@ public class fplusParser extends Parser {
 			case 9:
 				{
 				setState(161);
-				objectAccess();
+				tableAccess();
 				}
 				break;
 			case 10:
@@ -1168,10 +1168,10 @@ public class fplusParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class ObjectAccessContext extends ParserRuleContext {
+	public static class tableAccessContext extends ParserRuleContext {
 		public TerminalNode ID() { return getToken(fplusParser.ID, 0); }
-		public ObjectDeclarationContext objectDeclaration() {
-			return getRuleContext(ObjectDeclarationContext.class,0);
+		public tableDeclarationContext tableDeclaration() {
+			return getRuleContext(tableDeclarationContext.class,0);
 		}
 		public TerminalNode DOT() { return getToken(fplusParser.DOT, 0); }
 		public TerminalNode LSQUARE() { return getToken(fplusParser.LSQUARE, 0); }
@@ -1179,23 +1179,23 @@ public class fplusParser extends Parser {
 			return getRuleContext(ExprContext.class,0);
 		}
 		public TerminalNode RSQUARE() { return getToken(fplusParser.RSQUARE, 0); }
-		public ObjectAccessContext(ParserRuleContext parent, int invokingState) {
+		public tableAccessContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_objectAccess; }
+		@Override public int getRuleIndex() { return RULE_tableAccess; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof fplusListener ) ((fplusListener)listener).enterObjectAccess(this);
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).entertableAccess(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof fplusListener ) ((fplusListener)listener).exitObjectAccess(this);
+			if ( listener instanceof fplusListener ) ((fplusListener)listener).exittableAccess(this);
 		}
 	}
 
-	public final ObjectAccessContext objectAccess() throws RecognitionException {
-		ObjectAccessContext _localctx = new ObjectAccessContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_objectAccess);
+	public final tableAccessContext tableAccess() throws RecognitionException {
+		tableAccessContext _localctx = new tableAccessContext(_ctx, getState());
+		enterRule(_localctx, 26, RULE_tableAccess);
 		try {
 			setState(198);
 			_errHandler.sync(this);
@@ -1211,7 +1211,7 @@ public class fplusParser extends Parser {
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(189);
-				objectDeclaration();
+				tableDeclaration();
 				setState(196);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {

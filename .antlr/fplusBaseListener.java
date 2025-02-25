@@ -88,13 +88,13 @@ public class fplusBaseListener implements fplusListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterObjectDeclaration(fplusParser.ObjectDeclarationContext ctx) { }
+	@Override public void entertableDeclaration(fplusParser.tableDeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitObjectDeclaration(fplusParser.ObjectDeclarationContext ctx) { }
+	@Override public void exittableDeclaration(fplusParser.tableDeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -172,13 +172,13 @@ public class fplusBaseListener implements fplusListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterObjectAccess(fplusParser.ObjectAccessContext ctx) { }
+	@Override public void entertableAccess(fplusParser.tableAccessContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitObjectAccess(fplusParser.ObjectAccessContext ctx) { }
+	@Override public void exittableAccess(fplusParser.tableAccessContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

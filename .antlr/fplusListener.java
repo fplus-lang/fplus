@@ -67,15 +67,15 @@ public interface fplusListener extends ParseTreeListener {
 	 */
 	void exitParams(fplusParser.ParamsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link fplusParser#objectDeclaration}.
+	 * Enter a parse tree produced by {@link fplusParser#tableDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void enterObjectDeclaration(fplusParser.ObjectDeclarationContext ctx);
+	void entertableDeclaration(fplusParser.tableDeclarationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link fplusParser#objectDeclaration}.
+	 * Exit a parse tree produced by {@link fplusParser#tableDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void exitObjectDeclaration(fplusParser.ObjectDeclarationContext ctx);
+	void exittableDeclaration(fplusParser.tableDeclarationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link fplusParser#variableDeclaration}.
 	 * @param ctx the parse tree
@@ -137,15 +137,15 @@ public interface fplusListener extends ParseTreeListener {
 	 */
 	void exitFunctionCall(fplusParser.FunctionCallContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link fplusParser#objectAccess}.
+	 * Enter a parse tree produced by {@link fplusParser#tableAccess}.
 	 * @param ctx the parse tree
 	 */
-	void enterObjectAccess(fplusParser.ObjectAccessContext ctx);
+	void entertableAccess(fplusParser.tableAccessContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link fplusParser#objectAccess}.
+	 * Exit a parse tree produced by {@link fplusParser#tableAccess}.
 	 * @param ctx the parse tree
 	 */
-	void exitObjectAccess(fplusParser.ObjectAccessContext ctx);
+	void exittableAccess(fplusParser.tableAccessContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link fplusParser#arrayAccess}.
 	 * @param ctx the parse tree

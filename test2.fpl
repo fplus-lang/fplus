@@ -1,0 +1,5 @@
+local x = {1, 2, foo = "bar"}
+print(x[1])  -- 1
+print(x[2])  -- 2
+print(x[3])  -- nil
+print(x.foo)  -- bar

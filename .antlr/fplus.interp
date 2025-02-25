@@ -87,14 +87,14 @@ printExpr
 functionDeclaration
 anonymousFunctionDeclaration
 params
-objectDeclaration
+tableDeclaration
 variableDeclaration
 localVariableDeclaration
 keyValuePair
 exprList
 expr
 functionCall
-objectAccess
+tableAccess
 arrayAccess
 variableAccess
 parens
