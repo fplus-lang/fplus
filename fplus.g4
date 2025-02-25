@@ -56,7 +56,7 @@ printExpr : PRINT LPAREN exprList? RPAREN;
 functionDeclaration : LOCAL? FUNCTION ID LPAREN params? RPAREN statement* END;
 anonymousFunctionDeclaration : FUNCTION LPAREN params? RPAREN statement* END;
 params : ID (COMMA ID)*;
-tableDeclaration : LBRACE ((exprList | keyValuePair) (COMMA (exprList | keyValuePair))*)? RBRACE;
+tableDeclaration : LBRACE ((exprList | keyValuePair) (COMMA (exprList | keyValuePair))*)* RBRACE;
 variableDeclaration : ID '=' expr;
 localVariableDeclaration : LOCAL ID '=' expr;
 keyValuePair : (ID | STRING) '=' expr;

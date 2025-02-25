@@ -88,30 +88,32 @@ class SimpleLangCompiler {
         return "";
     }
 
-    // visitTableAccess will handle both dot notation (x.foo) and bracket notation (x[1])
     visitTableAccess(ctx) {
-        const objectName = this.getText(ctx.ID(0)); // The object being accessed (x)
-        const property = ctx.expr(1) || ctx.ID(1) // The second expression (foo for dot notation or 1 for array access)
-        //console.log(thi)
-        if (property) {
-            // If the property is an integer, it should be treated as array access (x[1])
+        //console.log(this.getText(ctx.ID(0)))
+        const objectName = this.getText(ctx.ID(0));
+        const property = ctx.ID()[1] || ctx.expr(1);
+        console.log(this.getText(ctx.ID()[1]));
+        if (this.getText(property)) {
             if (this.isType(property, "INTEGER")) {
                 const index = this.visitExpr(property);
-                return `${objectName}[${index}]`; // Array-style access
-            }
-            // If the property is an ID (object property), treat it as dot notation (x.foo)
-            else if (this.isType(property, "ID")) {
-                const key = this.visitExpr(property); // Get the property name (foo)
-                return `${objectName}.${key}`; // Dot notation access (x.foo)
-            }
-            // If the property is a string, treat it as array-style access (x["foo"])
-            else if (this.isType(property, "STRING")) {
-                const key = this.visitExpr(property); // Property is a string
-                return `${objectName}[${key}]`; // Array-style access
+                return `${objectName}[${index}]`;
+            } else if (
+                this.isType(property, "STRING") ||
+                property.symbol.type === 54 // weird way of detecting if it's an ID
+            ) {
+                //console.log(!!this.isType(property, "ID"))
+                const isString = this.isType(property, "STRING");
+                const key = isString
+                    ? this.visitExpr(property)
+                    : this.getText(property);
+                const out = isString
+                    ? `${objectName}[${key}]`
+                    : `${objectName}.${key}`;
+                return out;
             }
         }
 
-        return "";
+        return "null";
     }
 
     visitTableDeclaration(ctx) {
@@ -119,11 +121,14 @@ class SimpleLangCompiler {
             .keyValuePair()
             .map((kv) => this.visitKeyValuePair(kv))
             .join(",\n");
-        const arrayValues = ctx
-            .exprList(0)
-            .children.filter((item) => !!item.expr)
-            .map((expr, index) => `${index + 1}: ${this.visitExpr(expr)}`)
-            .join(",\n");
+        let arrayValues = "";
+        for (let i = 0; i < ctx.exprList().length; i++) {
+            arrayValues += ctx
+                .exprList(i)
+                .children.filter((item) => !!item.expr)
+                .map((expr, index) => `${this.getText(ctx.parentCtx.children[ctx.parentCtx.children.indexOf(ctx) - 1]) ? ",\n" : ""}${this.visitExpr(expr)}: ${this.visitExpr(expr)}`)
+                .join(",\n");
+        }
 
         return `{
         ${elements}
