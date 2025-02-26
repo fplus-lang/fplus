@@ -20,11 +20,12 @@ class SimpleLangCompiler {
     // Statement visitor
     visitStatement(ctx) {
         if (this.isType(ctx, "printExpr")) {
-            return `console.log(${
-                ctx.printExpr().exprList()
-                    ? this.visitExprList(ctx.printExpr().exprList())
-                    : ""
-            });`;
+            return `console.log(${ctx.printExpr().exprList()
+                ? this.visitExprList(ctx.printExpr().exprList())
+                : ""
+                });`;
+        } else if (this.isType(ctx, "arithmeticOperation")) {
+            return this.visitArithmeticOperation(ctx.arithmeticOperation)
         } else if (this.isType(ctx, "functionDeclaration")) {
             return this.visitFunctionDeclaration(ctx.functionDeclaration());
         } else if (this.isType(ctx, "anonymousFunctionDeclaration")) {
@@ -54,9 +55,8 @@ class SimpleLangCompiler {
     visitExprList(ctx) {
         let output = "";
         for (let i = 0; i < ctx.expr().length; i++) {
-            output += `${this.visitExpr(ctx.expr(i))}${
-                i !== ctx.expr().length - 1 ? ", " : ""
-            }`;
+            output += `${this.visitExpr(ctx.expr(i))}${i !== ctx.expr().length - 1 ? ", " : ""
+                }`;
         }
         return output;
     }
@@ -74,8 +74,6 @@ class SimpleLangCompiler {
             return "null";
         } else if (this.isType(ctx, "ID")) {
             return ctx.ID().getText();
-        } else if (this.isType(ctx, "arithmeticExpr")) {
-            return this.visitArithmeticExpr(ctx.arithmeticExpr());
         } else if (this.isType(ctx, "functionCall")) {
             return this.visitFunctionCall(ctx.functionCall());
         } else if (this.isType(ctx, "tableDeclaration")) {
@@ -92,7 +90,7 @@ class SimpleLangCompiler {
         //console.log(this.getText(ctx.ID(0)))
         const objectName = this.getText(ctx.ID(0));
         const property = ctx.ID()[1] || ctx.expr(1);
-        console.log(this.getText(ctx.ID()[1]));
+        //console.log(this.getText(ctx.ID()[1]));
         if (this.getText(property)) {
             if (this.isType(property, "INTEGER")) {
                 const index = this.visitExpr(property);
@@ -117,23 +115,36 @@ class SimpleLangCompiler {
     }
 
     visitTableDeclaration(ctx) {
-        const elements = ctx
-            .keyValuePair()
-            .map((kv) => this.visitKeyValuePair(kv))
-            .join(",\n");
-        let arrayValues = "";
-        for (let i = 0; i < ctx.exprList().length; i++) {
-            arrayValues += ctx
-                .exprList(i)
-                .children.filter((item) => !!item.expr)
-                .map((expr, index) => `${this.getText(ctx.parentCtx.children[ctx.parentCtx.children.indexOf(ctx) - 1]) ? ",\n" : ""}${this.visitExpr(expr)}: ${this.visitExpr(expr)}`)
-                .join(",\n");
+        let obj = {};
+        let arr = [];
+        let output = "";
+        if (this.isType(ctx, "keyValuePair")) ctx.keyValuePair().forEach(item => {
+            let key = this.isType(item, "ID")
+                ? this.getText(item.ID())
+                : this.getText(item.STRING());
+            let value = this.visitExpr(item.expr());
+            obj[key] = value;
+        })
+        ctx.exprList().forEach(item => {
+            for (let i = 0; i < item.expr().length; i++) {
+                //console.log(!!this.isType(item.expr(i), "INTEGER"))
+                arr.push(JSON.parse(this.visitExpr(item.expr(i))))
+            }
+        })
+        //console.log(obj);
+        //console.log(arr)
+        let i = 0;
+        //let x = 0;
+        for (let key in obj) {
+            output += `${i >= 1 ? ",\n" : ""}${key}: ${obj[key]}`
+            i++;
         }
-
-        return `{
-        ${elements}
-        ${arrayValues ? ", " + arrayValues : ""}
-      }`;
+        for (let item of arr) {
+            output += `${i >= 1 ? ",\n" : ""}${item}: ${item}`
+            i++;
+            //x++
+        }
+        return `{\n${output}\n}`;
     }
 
     visitKeyValuePair(ctx) {
@@ -159,8 +170,8 @@ class SimpleLangCompiler {
             ? !ctx.anonymousFunctionDeclaration
                 ? this.getText(ctx.ID())
                 : this.visitAnonymousFunctionDeclaration(
-                      ctx.anonymousFunctionDeclaration()
-                  )
+                    ctx.anonymousFunctionDeclaration()
+                )
             : this.getText(ctx.ID()) || this.visitLoadstring(ctx.loadstring());
         const args = ctx.exprList() ? this.visitExprList(ctx.exprList()) : "";
         return `${functionName}(${args})`;
@@ -171,10 +182,10 @@ class SimpleLangCompiler {
         const local = this.getText(ctx.LOCAL()) !== "";
         const params = ctx.params()
             ? ctx
-                  .params()
-                  .ID()
-                  .map((id) => this.getText(id))
-                  .join(", ")
+                .params()
+                .ID()
+                .map((id) => this.getText(id))
+                .join(", ")
             : "";
         const statements = ctx
             .statement()
@@ -185,19 +196,18 @@ class SimpleLangCompiler {
             this.currentScope[functionName] = true;
         }
         return local
-            ? `${
-                  exists ? "" : "let "
-              }${functionName} = ((${params}) => {\n${statements}\n})`
+            ? `${exists ? "" : "let "
+            }${functionName} = ((${params}) => {\n${statements}\n})`
             : `function ${functionName}(${params}) {\n${statements}\n}`;
     }
 
     visitAnonymousFunctionDeclaration(ctx) {
         const params = ctx.params()
             ? ctx
-                  .params()
-                  .ID()
-                  .map((id) => this.getText(id))
-                  .join(", ")
+                .params()
+                .ID()
+                .map((id) => this.getText(id))
+                .join(", ")
             : "";
         const statements = ctx
             .statement()
@@ -250,7 +260,7 @@ class SimpleLangCompiler {
         return "break;";
     }
 
-    visitArithmeticExpr(ctx) {
+    visitArithmeticOperation(ctx) {
         const leftOperand = this.visitExpr(ctx.expr(0));
         const operator = ctx.getChild(1).getText();
         const rightOperand = this.visitExpr(ctx.expr(1));

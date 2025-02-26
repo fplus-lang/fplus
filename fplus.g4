@@ -61,13 +61,14 @@ variableDeclaration : ID '=' expr;
 localVariableDeclaration : LOCAL ID '=' expr;
 keyValuePair : (ID | STRING) '=' expr;
 exprList : expr (COMMA expr)*;
+arithmaticExpr : exprList ('*' | '/' | '+' | '-' | '^' | '%' | '<<' | '>>' | '&' | '|' | '~') exprList;
 expr : STRING 
      | INTEGER
      | FLOAT 
      | BOOLEAN
      | NIL
      | ID
-     | expr ('*' | '/' | '+' | '-' | '^' | '%' | '<<' | '>>' | '&' | '|' | '~') expr
+     | arithmaticExpr
      | expr ('==' | '!=' | '<' | '<=' | '>' | '>=' ) expr
      | expr ('and' | 'or') expr
      | NOT expr
